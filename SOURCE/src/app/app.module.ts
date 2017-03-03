@@ -24,10 +24,12 @@ import { FooterComponent } from './common/footer/footer.component';
 import { HeaderComponent } from './common/header/header.component';
 import { SideBarComponent } from './common/side-bar/side-bar.component';
 
+
 //admin components
 import { AdminComponent } from './admin/admin.component';
 import { AdminViewInvoiceComponent } from './admin/admin-view-invoice/admin-view-invoice.component';
 import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.component';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.co
     //admin
     AdminComponent,
     AdminViewInvoiceComponent,
-    CreateInvoiceComponent
+    CreateInvoiceComponent,
+
   ],
   imports: [
     BrowserModule,
