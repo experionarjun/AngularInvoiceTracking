@@ -1,0 +1,32 @@
+<div class="body_cont "> 
+
+				<div class="invoice_header clear">
+					<h2>Invoice List</h2>
+				</div>
+        
+				<div class="invoice_cont clear"> 
+					<table id="invoiceList" class="display responsive nowrap" >
+							    <thead>
+							      <tr>
+							        <th id="no">#</th>
+							        <th id="cname">Customer Name</th>
+							        <th id="price">Price</th>
+							        <th id="status">Status</th>
+							        <th id="dueDate">Date Of Issue</th>
+							      </tr>
+							    </thead>
+							    <tbody id="invoiceRows"> 
+										<tr class="item-row" *ngFor="let invoice of invoiceList; let i=index;" (click)='showDetails(invoice.InvoiceID)'>
+												<td id="no"> {{i+1}} </td>
+												<td id="cname"> {{invoice.UserID}} </td>
+												<td id="price"> {{invoice.currency=="INR" ? "&#8377;" : ""}} {{invoice.currency=="USD" ? "$" : ""}} {{invoice.currency=="EUR" ? "&euro;" : ""}}  {{invoice.total}} </td>
+												<td id="status"> <b *ngIf='invoice.status== "Pending" '><span class="glyphicon glyphicon-exclamation-sign" style="color:#EE3233"></span></b> <b *ngIf='invoice.status=="Paid"'><span class="glyphicon glyphicon-ok-sign" style="color: green"></span></b> {{invoice.status}} </td>
+												<td  id="dueDate" [ngStyle]="{'text-align':'center'}"> {{invoice.date_of_issue | date:'dd-MM-yyyy'}} </td>
+
+										</tr>
+									</tbody>
+							
+							   </table>
+						</div>
+				</div>
+
