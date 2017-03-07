@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 
-export class AdminService{
+export class UserService{
     validate:any;
     headers:Headers;
     options:RequestOptions
@@ -30,10 +30,9 @@ export class AdminService{
 	}
 
     getInvoiceCount(){
-        return this.http.get(url+"auth/invoiceCount",this.options)
+        return this.http.get(url+"auth/user/invoiceCount",this.options)
         .map(res=>res.json());
     }
-
     getInvoiceList(offset:any){
         let header =new Headers({ 
             'Content-Type': 'application/json', 
@@ -41,22 +40,13 @@ export class AdminService{
             'offset' : offset
          });
         let options = new RequestOptions({ headers: header});
-        return this.http.get(url+"auth/Invoice",options)
+        return this.http.get(url+"auth/user/Invoice",options)
 			.map(res => res.json());
             
     }
-
     getInvoiceDetails(invID){
-        return this.http.get(url+'auth/Invoice/' + invID, this.options)
-            .map(res => res.json())
+    return this.http.get(url+'auth/Invoice/' + invID, this.options)
+        .map(res => res.json())
     }
 
-    changeStatus(invID,newStatus){
-
-        return this.http.put(url+'auth/Invoice/'+invID,{ newStatus: newStatus },this.options)
-            .map(res => res.text())
-    }
-
-   
-} 
-
+}

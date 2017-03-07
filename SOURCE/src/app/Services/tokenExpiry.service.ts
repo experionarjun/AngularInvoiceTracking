@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import {Router} from '@angular/router'
-import {url} from '../serverConfig'
+import {url} from '../../serverConfig'
 
 
 import 'rxjs/add/operator/map';

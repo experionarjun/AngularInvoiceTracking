@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      UID: new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(20)]),
-      password : new FormControl('',[Validators.required, Validators.minLength(3),Validators.maxLength(20)])
+      UID: new FormControl('', [Validators.required, Validators.minLength(5),Validators.maxLength(20)]),
+      password : new FormControl('',[Validators.required, Validators.minLength(5),Validators.maxLength(20)])
     })
     this.responseError = null;
     this.responseSuccess = null;
@@ -53,7 +53,11 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("UID", res.UID);
             localStorage.setItem("Role", res.type);
             localStorage.setItem("token", res.token);
-            this.router.navigate(["/admin"]);
+            if(res.type == 'Admin'){
+              this.router.navigate(["/admin"]);
+            }else{
+              this.router.navigate(["/user"]);
+            }
         }else{
            console.log("fail")
           this.responseSuccess = null;
@@ -83,7 +87,7 @@ export class LoginComponent implements OnInit {
 
 }
 
-interface reset{
+export interface reset{
   Fail:boolean;
   Success:boolean;
   Hidden:boolean;

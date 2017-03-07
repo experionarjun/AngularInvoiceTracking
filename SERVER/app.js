@@ -132,7 +132,23 @@ authRouter.route('/customer/:UID')
     })
 })
 
+adminRouter.route('/invoiceCount')
+//................get invoice count..............
+ .get(function(req,res){
+        var Admin = JSON.parse(req.headers.authorization); 
+        pool.query("SELECT COUNT(*) AS count FROM Invoice WHERE CreatedBy = " +Admin.UID,function(err,rows){
+            if(!err){
+                rows = parse(rows)
+                res.send(rows)
+            }else{
+                 var error = { msg:"error"}
+                res.send(error)
+            }
+        })
+    })
 
+// pool.query("SELECT a.InvoiceID,a.date_of_issue,a.currency,a.status,a.total,b.UserID FROM Invoice a, user b where CreatedBy = "+Admin.UID+" and a.UID = b.UID ORDER BY a.date_of_issue DESC LIMIT 10 OFFSET "+offset, function(err, rows) {
+         
 
 
 adminRouter.route('/Invoice')
@@ -146,7 +162,9 @@ adminRouter.route('/Invoice')
     .get(function(req, res) {
         var invoice = null;
         var Admin = JSON.parse(req.headers.authorization); 
-        pool.query("SELECT a.InvoiceID,a.date_of_issue,a.currency,a.status,a.total,b.UserID FROM Invoice a, user b where CreatedBy = "+Admin.UID+" and a.UID = b.UID ORDER BY a.date_of_issue DESC", function(err, rows) {
+        var offset = JSON.parse(req.headers.offset);
+       
+        pool.query("SELECT * FROM Invoice a, user b where CreatedBy = "+Admin.UID+" and a.UID = b.UID ORDER BY a.date_of_issue DESC LIMIT 10 OFFSET "+offset, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -154,6 +172,7 @@ adminRouter.route('/Invoice')
             res.send(invoice);
         });
     });
+   
 
 adminRouter.route('/Invoice/:invID')
     //-------------------Display Invoice---------------   
@@ -186,7 +205,8 @@ userRouter.route('/Invoice')
     .get(function(req, res) {
         var invoice = null;
         var user = JSON.parse(req.headers.authorization); 
-        pool.query("SELECT a.InvoiceID,a.invoice_no,a.date_of_issue,a.currency,a.total,a.status,a.dueDate FROM Invoice a where UID = "+user.UID+" ORDER BY a.InvoiceID DESC", function(err, rows) {
+        var offset = JSON.parse(req.headers.offset);
+        pool.query("SELECT a.InvoiceID,a.invoice_no,a.date_of_issue,a.currency,a.total,a.status,a.dueDate FROM Invoice a where UID = "+user.UID+" ORDER BY a.InvoiceID DESC LIMIT 10 OFFSET "+offset, function(err, rows) {
             if (err) {
                 throw err;
             }
@@ -194,6 +214,23 @@ userRouter.route('/Invoice')
             res.send(invoice);
         });
     });
+
+
+userRouter.route('/invoiceCount')
+//................get invoice count..............
+ .get(function(req,res){
+        var user = JSON.parse(req.headers.authorization); 
+        pool.query("SELECT COUNT(*) AS count FROM Invoice WHERE UID = " +user.UID,function(err,rows){
+            if(!err){
+                rows = parse(rows)
+                res.send(rows)
+            }else{
+                 var error = { msg:"error"}
+                res.send(error)
+            }
+        })
+    })
+
 
 // console.log("p", path.join(__dirname,".."));
 app.use('/', loginRouter);

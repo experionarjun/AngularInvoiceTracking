@@ -6,12 +6,18 @@ import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ng2-bootstrap';
 import { AlertModule } from 'ng2-bootstrap';
+import {PaginationModule} from 'ng2-bootstrap'
+import {DataTableModule} from "angular2-datatable";
+
+//JSPDF
+// import "../../node_modules/jspdf/dist/jspdf.min.js"
 
 import { AppComponent } from './app.component';
 
 //Auth services
-import {AdminAuth} from './adminAuth.service'
-import {TokenExpiryService} from './tokenExpiry.service'
+import {AdminAuth} from './Services/adminAuth.service'
+import {UserAuth} from './Services/userAuth.service'
+import {TokenExpiryService} from './Services/tokenExpiry.service'
 
 //Routes
 import {ROUTES, appRoutingProviders} from "./app.routes";
@@ -29,6 +35,8 @@ import { SideBarComponent } from './common/side-bar/side-bar.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminViewInvoiceComponent } from './admin/admin-view-invoice/admin-view-invoice.component';
 import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.component';
+import { UserComponent } from './user/user.component';
+import { UserViewComponent } from './user/user-view/user-view.component';
 
 
 
@@ -48,6 +56,10 @@ import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.co
     AdminViewInvoiceComponent,
     CreateInvoiceComponent,
 
+    //user
+    UserComponent,
+    UserViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -57,8 +69,10 @@ import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.co
     RouterModule.forRoot(ROUTES),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    PaginationModule.forRoot(),
+    DataTableModule,
   ],
-  providers: [AdminAuth,TokenExpiryService],
+  providers: [TokenExpiryService,AdminAuth,UserAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

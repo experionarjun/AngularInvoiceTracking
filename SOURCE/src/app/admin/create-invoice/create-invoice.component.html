@@ -1,1 +1,66 @@
-UNDER CONSTRUCTION
+<div class="body_cont"> 
+    <div class="invoice_header clear">
+        <h2>Create Invoice</h2>
+    </div>
+    <div class="invoice_cont clear">
+        
+        <!--=====FORM=====-->
+        <form novalidate >
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>Invoice No.</p>
+                    <input type="text" placeholder="Invoice No." name="invoice_no" disabled="disabled"><br>
+                    <!-- <p>Customer Name</p> -->
+                    <select name="cname" id="cnameDroplist">
+                        <option value="" selected disabled>Customer Name</option>
+                    </select><br>
+                    <!-- <p>Currency</p> -->
+                    <select name="currency" style="background-color:#fcfcfc">
+                        <option value="" selected disabled>Currency</option>
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="INR">INR</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <div class="rows dates" >
+                        <div class="col-sm-6">
+                            <p>Date of Issue</p>
+                            <input type="text" id="datepicker" title="Date of Issue" placeholder="Date of Issue" name="doi">
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Due Date</p>
+                            <input type="text" id="datepicker2"  placeholder="Due Date" name="dueDate">
+                        </div>
+                    </div>
+                    <p>Address </p>	
+                    <input type="text" placeholder="Address" name="address"> <br>
+                    <div class="rows dates" >
+                        <div class="col-sm-6" >
+                            
+                            <input type="text" placeholder="City" name="city">
+                        </div>
+                        <div class="col-sm-6">
+                                
+                            <input type="text" placeholder="State" name="state">
+                        </div>
+                    </div>
+                        
+                    <input type="number" placeholder="Zip code" name="zip" title="Enter Valid Zip code">
+                    
+                    <input type="text" placeholder="Country" name="country">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-default" id="editAddress" title="Edit Address"><span class="glyphicon glyphicon-edit" ></span> Edit </button>
+                        <button type="button" id="saveAddress" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span> Save </button>
+                        <button type="button" id="cancelAddress" class="btn btn-danger"> <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr/>
+
+
+
+    </div>
+</div>

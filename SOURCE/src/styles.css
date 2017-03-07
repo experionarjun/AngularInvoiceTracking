@@ -8,6 +8,15 @@ body{
 
 }
 
+a{
+	cursor: pointer;
+	
+}
+
+#invoiceList thead a{
+	color: white !important;
+    text-decoration: none !important;
+}
 .Header{
 	background-color: #EE3233;
 	width: 100%;

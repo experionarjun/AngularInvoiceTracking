@@ -13,11 +13,14 @@
 		   			<div id="resetSuccess"></div>
              <form novalidate (submit)="login(loginForm)" [formGroup]="loginForm">
               <div class="result" *ngIf="loginForm.get('UID').hasError('required') && loginForm.get('UID').touched"><span class='glyphicon glyphicon-ban-circle'></span> User ID is Required </div>
+			   <div class="result" *ngIf="loginForm.get('UID').hasError('minlength')  && loginForm.get('UID').touched">Min Length is 5 </div>
 				   		<div class="input-group margin">
 						    <span class="input-group-addon BG"><i class="glyphicon glyphicon-user"></i></span>
                 <input  type="text" class="form-control" placeholder="User ID" formControlName='UID'>
 						</div>
             <div class="result"*ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched"><span class='glyphicon glyphicon-ban-circle'></span> Password is Required </div>
+			<div class="result" *ngIf="loginForm.get('password').hasError('minlength')  && loginForm.get('UID').touched">Min Length is 5 </div>
+				
 						<div class="input-group ">
 						    <span class="input-group-addon BG"><i class="glyphicon glyphicon-lock"></i></span>
 						    <input type="password" class="form-control" placeholder="Password" formControlName='password'>
@@ -45,7 +48,7 @@
 				<div id="forgotCont">	
 					<alert *ngIf="reset.Fail" type="danger" ><span class='glyphicon glyphicon-ban-circle'></span> Invalid Email</alert>
 					<alert *ngIf="reset.Success" type="success" > <span class="glyphicon glyphicon-ok-circle"></span> <strong>Success!</strong> An e-mail has been sent to your account </alert>
-						<div [hidden]="!reset.Hidden">   	
+						<div [hidden]="reset.Hidden">   	
 							<p style="color: #8c8888;">Enter your E-mail ID</p>
 							<input type="text"  id="forgotEmail" #Email placeholder = "E-mail" [disabled]="reset.Hidden">
 						</div>

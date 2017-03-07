@@ -1,42 +1,39 @@
 <div class="body_cont "> 
-	<div class="invoice_header clear">
-		<h2>Invoice List</h2>
-		</div>
-	<div class="invoice_cont clear"> 
-		<table id="invoiceList" class="display responsive nowrap" [mfData]="invoiceList" #mf="mfDataTable" [mfRowsOnPage]="10">
-						<thead> 
-							<tr>
-								<th id="no"> # </th>
-								<th id="cname"> <mfDefaultSorter by="UserID">Customer Name</mfDefaultSorter></th>
-								<th id="price"> <mfDefaultSorter by="total">Price </mfDefaultSorter></th>
-								<th id="status">Status</th>
-								<th id="dueDate"> <mfDefaultSorter by="date_of_issue">Date Of Issue</mfDefaultSorter></th>
-							</tr>
-						</thead>
-						<tbody id="invoiceRows"> 
-							<tr class="item-row" *ngFor="let invoice of mf.data; let i=index;" (click)='showDetails(invoice.InvoiceID,i); lgModal.show();'>
+  <div class="invoice_header clear">
+    <h2>Invoice List</h2>
+  </div>
+  <div class="invoice_cont clear"> 
+
+    <table id="invoiceList" class="display responsive nowrap" [mfData]="invoiceList" #mf="mfDataTable" [mfRowsOnPage]="10">
+            <thead>
+              <tr>
+                <th id="no">#</th>
+                <th id="invoiceno"><mfDefaultSorter by="invoice_no">Invoice No.</mfDefaultSorter></th>
+                <th id="doi"><mfDefaultSorter by="date_of_issue">Date Of Issue</mfDefaultSorter></th>
+                <th id="price"><mfDefaultSorter by="total">Price</mfDefaultSorter></th>
+                <th id="status">Status</th>
+                <th id="dueDate"><mfDefaultSorter by="dueDate">Due Date</mfDefaultSorter></th>                
+              </tr>
+            </thead>
+            <tbody id="invoiceRows">
+              <tr class="item-row" *ngFor="let invoice of mf.data; let i=index;" (click)='showDetails(invoice.InvoiceID); lgModal.show();'>
 									<td id="no"> {{i+1}} </td>
-									<td id="cname"> {{invoice.UserID}} </td>
+									<td id="invoiceno"> {{invoice.invoice_no}} </td>
+                  <td  id="doi" [ngStyle]="{'text-align':'center'}"> {{invoice.date_of_issue | date:'dd-MM-yyyy'}} </td>
 									<td id="price"> {{invoice.currency=="INR" ? "&#8377;" : ""}} {{invoice.currency=="USD" ? "$" : ""}} {{invoice.currency=="EUR" ? "&euro;" : ""}} {{invoice.total}} </td>
 									<td id="status"> <b *ngIf='invoice.status== "Pending" '><span class="glyphicon glyphicon-exclamation-sign" style="color:#EE3233"></span></b> <b *ngIf='invoice.status=="Paid"'><span class="glyphicon glyphicon-ok-sign" style="color: green"></span></b> {{invoice.status}} </td>
-									<td  id="dueDate" [ngStyle]="{'text-align':'center'}"> {{invoice.date_of_issue | date:'dd-MM-yyyy'}} </td>
+									<td  id="dueDate" [ngStyle]="{'text-align':'center'}"> {{invoice.dueDate | date:'dd-MM-yyyy'}} </td>
 							</tr>
-						</tbody>
-						<!--<tfoot>
-							<tr>
-								<td colspan="4">
-									<mfBootstrapPaginator [rowsOnPageSet]="[10,25]"></mfBootstrapPaginator>
-								</td>
-							</tr>
-							</tfoot>-->
-				
-						</table>
-						
-						<pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+               
+            </tbody>
+        
+            </table>
+            <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
 					
-		</div>
-</div>
+      </div>
 
+
+</div>
 
 <div class="modal fade" id="myModal" bsModal #lgModal="bs-modal" role="dialog">
 	<div class="modal-dialog modal-lg">
@@ -50,12 +47,10 @@
 				</div>
 			</div>
 			<div *ngIf='invoiceDetails'  class="modal-body">
-				<alert *ngIf="statusChangeALert.Fail" type="danger" ><span class='glyphicon glyphicon-ban-circle'></span> Something Happened. Please try again.</alert>
-				<alert *ngIf="statusChangeALert.Success" type="success" > <span class="glyphicon glyphicon-ok-circle"></span> <strong>Success!</strong> Status Updated. </alert>		
-				<div class="row">
+					<div class="row">
 					<div class="col-sm-6" >
-						<h4>Invoice No: {{invoiceDetails.invoice_no}}</h4>
-						<h4>Billed To: {{invoiceDetails.Details.UserID}}</h4>
+						<h4>Invoice No: {{invoiceDetails.Details.invoice_no}}</h4>
+						<h4>Billed To: {{invoiceDetails.UserID}}</h4>
 						<div class="clear" id="modalAddress">
 							<h4>Address: </h4>
 						</div>
@@ -63,13 +58,7 @@
 					</div>
 					<div class="col-sm-6" >
 						<h4>Date of Issue: {{invoiceDetails.Details.date_of_issue | date:'dd-MM-yyyy'}}</h4>
-						<h4>Due Date: {{invoiceDetails.dueDate | date:'dd-MM-yyyy'}}</h4>
-						<select #status id='saveStatusSelect' class='status' (change)='saveStatusButton = true;' [value]='invoiceDetails.Details.status'>
-							<option value='Pending'>Pending</option>
-							<option value='Paid'>Paid</option>
-						</select>
-						<button type = "button" class = "btn btn-default" *ngIf='saveStatusButton' (click)='saveNewSatus(status.value)'><span class="glyphicon glyphicon-floppy-save"></span></button>
-					
+						<h4>Due Date: {{invoiceDetails.Details.dueDate | date:'dd-MM-yyyy'}}</h4>
 					</div>
 				</div>     
 				<table class="table table-responsive">
@@ -110,7 +99,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-

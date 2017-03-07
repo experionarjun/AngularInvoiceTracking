@@ -8,8 +8,13 @@ import { AdminComponent } from './admin/admin.component';
 import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.component';
 import {AdminViewInvoiceComponent} from "./admin/admin-view-invoice/admin-view-invoice.component";
 
+//user
+import { UserComponent } from './user/user.component';
+import { UserViewComponent } from './user/user-view/user-view.component';
+
 //authService
-import {AdminAuth} from './adminAuth.service'
+import {AdminAuth} from './Services/adminAuth.service';
+import {UserAuth} from './Services/userAuth.service'
 
 
 export const ROUTES:Routes = [
@@ -19,8 +24,8 @@ export const ROUTES:Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'login/:msg', component: LoginComponent},
     
-    // Handle all other routes
-   
+    
+   // admin
     {
         path:'admin', 
         component : AdminComponent,
@@ -33,6 +38,19 @@ export const ROUTES:Routes = [
 
         ]
     },
+    //user
+    {
+        path:'user', 
+        component : UserComponent,
+        canActivate : [UserAuth], 
+        children: [
+            { path:'', redirectTo: 'view', pathMatch: 'full'},
+            { path:'view', component:UserViewComponent},
+            { path:'**', redirectTo: 'view'},
+
+        ]
+    },
+    // Handle all other routes
      {path: '**',    component: LoginComponent }
     
 ];
