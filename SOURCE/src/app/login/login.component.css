@@ -1,6 +1,6 @@
 .main_body{
     background-color: #EE3233;  
-}
+    }
 
 #body{
         background-color: #EE3233;
@@ -13,18 +13,18 @@
     font-size: 10px;
     color: #EE3233;
     margin-bottom: 0px;
-}
+    }
 
 .success{
     font-family: monospace;
     font-size: 10px;
     color: green;
     margin-bottom: 10px;
-}
+    }
 
 @media only screen and (min-device-width: 200px) and (max-device-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
-.result,.success{
-    color:#333;
-}
+    .result,.success{
+        color:#333;
+     }
 
-}
+    }
