@@ -12,19 +12,21 @@ import {AdminViewInvoiceComponent} from "./admin/admin-view-invoice/admin-view-i
 import { UserComponent } from './user/user.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
 
+//error404
+import {Error404Component} from './error404/error404.component'
+
 //authService
 import {AdminAuth} from './Services/adminAuth.service';
 import {UserAuth} from './Services/userAuth.service'
 
 
 export const ROUTES:Routes = [
-    // Main redirect
+      // Main redirect
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     // App views
     {path: 'login', component: LoginComponent},
     {path: 'login/:msg', component: LoginComponent},
-    
-    
+
    // admin
     {
         path:'admin', 
@@ -34,10 +36,10 @@ export const ROUTES:Routes = [
             { path:'', redirectTo: 'create', pathMatch: 'full'},
             { path:'create', component:CreateInvoiceComponent},
             { path:'view', component:AdminViewInvoiceComponent},
-            { path:'**', redirectTo: 'create'},
-
         ]
     },
+     { path:'admin/**', component: Error404Component},
+
     //user
     {
         path:'user', 
@@ -46,12 +48,12 @@ export const ROUTES:Routes = [
         children: [
             { path:'', redirectTo: 'view', pathMatch: 'full'},
             { path:'view', component:UserViewComponent},
-            { path:'**', redirectTo: 'view'},
-
+            
         ]
     },
+    { path:'user/**', component: Error404Component},
     // Handle all other routes
-     {path: '**',    component: LoginComponent }
+     {path: '**',    component: Error404Component }
     
 ];
 

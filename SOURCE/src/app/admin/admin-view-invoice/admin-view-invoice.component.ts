@@ -68,7 +68,8 @@ export class AdminViewInvoiceComponent implements OnInit {
       Fail: false,
       Hidden: false
     }
-    this.detailOf = i;
+    this.detailOf = InvID;
+
     this.AdminService.getInvoiceDetails(InvID).subscribe(res => {
       if (res.length != 0) {
         let dummyList = [];
@@ -118,7 +119,13 @@ export class AdminViewInvoiceComponent implements OnInit {
           this.statusChangeALert.Fail = false;
           this.invoiceDetails.Details.status = value;
           (<HTMLInputElement>document.getElementById('saveStatusSelect')).value = value;
-          this.invoiceList[this.detailOf].status = value;
+          let dummyInvID =  this.detailOf;
+          this.invoiceList.forEach(function(element){
+               
+            if(element.InvoiceID == dummyInvID){
+              element.status = value;
+            }
+          })
         } else {
           this.statusChangeALert.Success = false;
           this.statusChangeALert.Fail = true;

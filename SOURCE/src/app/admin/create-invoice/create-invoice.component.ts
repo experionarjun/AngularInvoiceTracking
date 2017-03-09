@@ -8,7 +8,7 @@ import {AdminService} from '../admin-services';
   providers : [AdminService]
 })
 export class CreateInvoiceComponent implements OnInit {
-
+  model;
   constructor(private AdminService: AdminService ) { }
 
   ngOnInit() {

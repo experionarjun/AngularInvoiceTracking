@@ -8,6 +8,7 @@ import { ModalModule } from 'ng2-bootstrap';
 import { AlertModule } from 'ng2-bootstrap';
 import {PaginationModule} from 'ng2-bootstrap'
 import {DataTableModule} from "angular2-datatable";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //JSPDF
 // import "../../node_modules/jspdf/dist/jspdf.min.js"
@@ -20,7 +21,7 @@ import {UserAuth} from './Services/userAuth.service'
 import {TokenExpiryService} from './Services/tokenExpiry.service'
 
 //Routes
-import {ROUTES, appRoutingProviders} from "./app.routes";
+import {routing} from "./app.routes";
 
 //login
 import { LoginComponent } from './login/login.component';
@@ -37,6 +38,7 @@ import { AdminViewInvoiceComponent } from './admin/admin-view-invoice/admin-view
 import { CreateInvoiceComponent } from './admin/create-invoice/create-invoice.component';
 import { UserComponent } from './user/user.component';
 import { UserViewComponent } from './user/user-view/user-view.component';
+import { Error404Component } from './error404/error404.component';
 
 
 
@@ -59,6 +61,7 @@ import { UserViewComponent } from './user/user-view/user-view.component';
     //user
     UserComponent,
     UserViewComponent,
+    Error404Component,
 
   ],
   imports: [
@@ -66,10 +69,11 @@ import { UserViewComponent } from './user/user-view/user-view.component';
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES),
+    routing,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
+    NgbModule.forRoot(),
     DataTableModule,
   ],
   providers: [TokenExpiryService,AdminAuth,UserAuth],

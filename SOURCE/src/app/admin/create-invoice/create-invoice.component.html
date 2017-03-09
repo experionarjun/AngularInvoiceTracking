@@ -27,7 +27,18 @@
                     <div class="rows dates" >
                         <div class="col-sm-6">
                             <p>Date of Issue</p>
-                            <input type="text" id="datepicker" title="Date of Issue" placeholder="Date of Issue" name="doi">
+                            <!--<input type="text" id="datepicker" title="Date of Issue" placeholder="Date of Issue" name="doi">-->
+                             <div class="form-group">
+                                <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd"
+                                        name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                                <div class="input-group-addon" (click)="d.toggle()" >
+                                    <img src="assets/calendar-icon.png" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                                </div>
+                                </div>
+                            </div>
+                        
+                        
                         </div>
                         <div class="col-sm-6">
                             <p>Due Date</p>
